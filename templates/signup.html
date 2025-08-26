@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Signup - High5{% endblock %}
+{% block content %}
+<div class="signup-container">
+  <form method="POST" class="signup-form">
+    <h2 class="signup-title">Sign Up</h2>
+
+    {% if error %}
+      <p class="error-msg">{{ error }}</p>
+    {% endif %}
+
+    <div class="form-group mb-3">
+      <label for="name"><b>Name:</b></label>
+      <input type="text" name="name" placeholder="Full Name" required class="form-control">
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="worker_id"><b>Worker ID:</b></label>
+      <input type="text" name="worker_id" placeholder="Worker ID" required class="form-control">
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="department"><b>Department:</b></label>
+      <input type="text" name="department" placeholder="Department" required class="form-control">
+      <small class="form-text text-muted">Eg: Finance, HR, IT.</small>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="email"><b>Company Email:</b></label>
+      <input type="email" name="email" placeholder="Email (@high5.com)" required class="form-control">
+      <small class="form-text text-muted">Eg: john@high5.com</small>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="password"><b>Password:</b></label>
+      <input type="password" name="password" placeholder="Password" required class="form-control">
+      <small class="form-text text-muted">
+        Must be at least 6 characters, with one number and one symbol.
+      </small>
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="confirm"><b>Confirm Password:</b></label>
+      <input type="password" name="confirm" placeholder="Confirm Password" required class="form-control">
+      <small class="form-text text-muted">Re-enter your password to confirm.</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+  </form>
+</div>
+
+<style>
+/* ✅ Center container */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* ✅ Signup form box */
+.signup-form {
+  width: 450px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  border: 2px solid #007bff; /* blue border */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  text-align: left;
+}
+
+/* ✅ Title */
+.signup-title {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #007bff;
+}
+
+/* ✅ Error message */
+.error-msg {
+  color: red;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ✅ Inputs */
+.signup-form .form-control {
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  transition: border-color 0.3s;
+}
+
+.signup-form .form-control:focus {
+  border-color: #007bff; /* blue border on focus */
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,123,255,0.5);
+}
+
+/* ✅ Button full width */
+.signup-form button {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Company Site{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+      /* ✅ Navbar styling */
+      .navbar {
+        background: linear-gradient(90deg, #d5dbdf);
+        box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      }
+      .navbar-brand {
+        color: #0c0c0c !important;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+      .navbar-nav .nav-link {
+        color: #0c0c0c !important;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      .navbar-nav .nav-link:hover {
+        color: #ffdd57 !important;
+      }
+      .navbar-text {
+        color: #ffdd57 !important;
+        font-weight: bold;
+      }
+
+      /* ✅ Background */
+      body {
+        background-color: #f0f4f9;
+      }
+
+      /* ✅ Flash messages */
+      .alert {
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      }
+
+      /* ✅ Container spacing */
+      .container {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md">
+      <a class="navbar-brand" href="{{ url_for('index') }}">High5</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ml-auto">
+          {% if session.user_id %}
+            <li class="nav-item"><span class="navbar-text mr-2">Hi, {{ session.user_name }}</span></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('chatbox') }}">Chatbox</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, msg in messages %}
+            <div class="alert alert-{{ 'success' if category=='success' else ('danger' if category=='danger' else 'info') }}" role="alert">
+              {{ msg }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

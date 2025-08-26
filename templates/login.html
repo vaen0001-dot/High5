@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="login-container">
+  <form method="POST" action="{{ url_for('login') }}" class="login-form">
+    <h2 class="login-title">Login</h2>
+
+    {% if error %}
+      <p class="error-msg">{{ error }}</p>
+    {% endif %}
+
+    <div class="form-group mb-3">
+      <label for="email"><b>Email</b></label>
+      <input id="email" class="form-control" type="email" name="email" placeholder="Enter your company email" required>
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="password"><b>Password</b></label>
+      <input id="password" class="form-control" type="password" name="password" placeholder="Enter your password" required>
+    </div>
+
+    <button class="btn btn-primary w-100" type="submit">Login</button>
+
+    <p class="signup-link mt-3">
+      Don’t have an account? <a href="{{ url_for('signup') }}">Sign up here</a>.
+    </p>
+  </form>
+</div>
+
+<style>
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 80px; /* Adjust this for how high/low you want */
+}
+
+/* ✅ Login card */
+.login-form {
+  width: 400px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  border: 2px solid #007bff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  text-align: left;
+}
+
+/* ✅ Title */
+.login-title {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #007bff;
+}
+
+/* ✅ Inputs */
+.login-form .form-control {
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  transition: border-color 0.3s;
+}
+
+.login-form .form-control:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,123,255,0.5);
+}
+
+/* ✅ Error message */
+.error-msg {
+  color: red;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ✅ Signup link */
+.signup-link {
+  text-align: center;
+  font-size: 14px;
+}
+.signup-link a {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+}
+.signup-link a:hover {
+  text-decoration: underline;
+}
+</style>
+{% endblock %}

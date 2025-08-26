@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <title>Flask Chat</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            text-align: center;
+        }
+
+        .chatbox { 
+            border: 1px solid #ccc; 
+            height: 300px; 
+            overflow-y: scroll; 
+            padding: 10px; 
+            margin: 20px auto; 
+            width: 400px; 
+            text-align: left;
+        }
+
+        .msg { margin: 5px 0; }
+        .user { font-weight: bold; color: blue; }
+
+        /* ✅ Center form properly */
+        form {
+            margin: 20px auto;
+            width: 400px;
+            text-align: left;
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat Room</h1>
+
+    <div class="chatbox">
+        {% for msg in messages %}
+            <div class="msg">
+                <span class="user">{{ msg.username }}:</span> {{ msg.text }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <form method="post" action="{{ url_for('send') }}">
+        <label for="username">Name:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your name" required>
+
+        <label for="text">Message:</label>
+        <input type="text" id="text" name="text" placeholder="Enter your message" required>
+
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+    <title>Flask Chat</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0;
+            background: #f2f2f2;
+        }
+
+        /* Navigation bar */
+        .navbar {
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 400px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .chatbox { 
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+
+        .msg {
+            margin: 10px 0;
+            display: flex;
+        }
+
+        .msg.left {
+            justify-content: flex-start;
+        }
+        .msg.left .bubble {
+            background: #e5e5ea;
+            color: black;
+            border-radius: 15px 15px 15px 0;
+        }
+
+        .msg.right {
+            justify-content: flex-end;
+        }
+        .msg.right .bubble {
+            background: #007bff;
+            color: white;
+            border-radius: 15px 15px 0 15px;
+        }
+
+        .bubble {
+            max-width: 70%;
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+
+        .form-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background: white;
+        }
+
+        .form-container input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .form-container button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ✅ Navigation bar -->
+    <div class="navbar">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <!-- ✅ Chat container -->
+    <div class="container">
+        <div class="header">Chat Room</div>
+
+        <div class="chatbox">
+            <!-- Welcome message -->
+            <div class="msg left">
+                <div class="bubble">
+                    <strong>Bot:</strong> Hello, {{ user }}! How can I help you?
+                </div>
+            </div>
+
+            <!-- Loop over all stored messages -->
+            {% for msg in messages %}
+                <div class="msg {% if msg.username == user %}right{% else %}left{% endif %}">
+                    <div class="bubble">
+                        <strong>{{ msg.username }}:</strong> {{ msg.text }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <form class="form-container" method="post" action="{{ url_for('chatbox') }}">
+            <input type="text" id="question" name="question" placeholder="Type a message..." required>
+            <button type="submit">➤</button>
+        </form>
+    </div>
+
+</body>
+</html>
