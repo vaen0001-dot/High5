@@ -87,29 +87,61 @@ Prerequisites
 - **Virtual environment**
 
 Installation
-# Clone repository
+1. Clone repository
+```powershell
+# 1) Clone repository
 git clone https://github.com/your-username/employee-support-chatbot.git
 cd employee-support-chatbot
 
-# Create and activate virtual environment
+# 2) Create & activate virtual environment
 python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
+# Windows
+# venv\Scripts\activate
 
-# Install dependencies
+# 3) Install dependencies
 pip install -r requirements.txt
+```
 
-Database Setup
-# Initialize the database
+4. Database Setup
+4.1 Initialize the database
+```powershell
+# Use the provided script to create the users table:
 python init_db.py
-Run the Application
+
+# (Manual alternative in Python REPL:)
+import sqlite3
+conn = sqlite3.connect("database.db")
+conn.execute("""
+CREATE TABLE IF NOT EXISTS users (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT NOT NULL,
+worker_id TEXT NOT NULL UNIQUE,
+department TEXT NOT NULL,
+email TEXT NOT NULL UNIQUE,
+password TEXT NOT NULL
+);
+""")
+conn.commit(); conn.close()
+```
+
+5. Run the app:
+```powershell
 python app.py
+```
 
-App runs at: http://127.0.0.1:5000/
-Database Schema
+6. Open the app in your browser:
+```powershell
+http://127.0.0.1:5000
+# Login domain rule: signup enforces emails ending with @high5.com. Passwords must be > 5 chars and include at least one number and one symbol.
+```
 
-The SQLite database (database.db) includes the following table:
-
-users – stores employee accounts (id, name, worker_id, department, email, password)
+7. (Optional) NLTK Data
+```powershell
+import nltk
+nltk.download('punkt'); nltk.download('wordnet'); nltk.download('omw-1.4')
+```
 
 ## Usage Guide
 
@@ -120,15 +152,25 @@ users – stores employee accounts (id, name, worker_id, department, email, pass
 - Confirm password → account created
 
 ### User Login
--Navigate to /login
+- Navigate to /login
 - Enter registered email and password
 - On success → redirected to chatbot
 
-## Chatbot Interaction
-- Type HR/IT/Finance queries like “leave application”, “financial claim”, “meeting room booking”
-- Get step-by-step guidance instantly
-- Say “quit” or “goodbye” → chatbot ends session and redirects to homepage
+### Chatbot Interaction
+- Ask: leave application, financial claim, meeting room booking, it equipment request, etc.
+- The bot returns step‑by‑step guidance
+- Say quit or goodbye → ends session & redirects to homepage
 
+## Security Notes
+- Passwords are hashed using Werkzeug (generate_password_hash / check_password_hash)
+- Sessions and flash messages use Flask’s secret key for production, set a strong key via env var and avoid committing secrets
+- Inputs are validated for email domain and password strength
+
+## Production Tips
+- Use a real secret key via env (e.g., FLASK_SECRET_KEY)
+- Serve behind a production WSGI server (e.g., Gunicorn) and reverse proxy
+- Consider migrating to PostgreSQL/MySQL for multi‑user scale and backups
+- 
 ## Reflection on Challenges and Learnings
 ### Technical Challenges
 - **Database Management** – Structuring user authentication with SQLite
@@ -145,3 +187,4 @@ users – stores employee accounts (id, name, worker_id, department, email, pass
 - Add admin dashboard to manage users & processes
 - Train chatbot with advanced NLP (spaCy / transformers)
 - Deploy app on Docker/Heroku for real-world use
+
