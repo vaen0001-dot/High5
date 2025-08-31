@@ -90,7 +90,7 @@ Installation
 1. Clone repository
 ```powershell
 # 1) Clone repository
-git clone https://github.com/your-username/employee-support-chatbot.git
+git clone https://github.com/vaen0001-dot/High5.git
 cd employee-support-chatbot
 
 # 2) Create & activate virtual environment
