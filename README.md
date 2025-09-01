@@ -21,7 +21,7 @@ This leads to:
 - Confusion due to scattered or unclear documentation
 - Reduced productivity as employees depend on manual assistance
 - Limited accessibility outside working hours
-- 
+  
 There is a need for a centralized, intelligent, and user-friendly system that allows employees to:
 - Securely log in with their credentials
 - Instantly get step-by-step guidance on organizational processes
@@ -104,8 +104,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Database Setup
-4.1 Initialize the database
+2. Database Setup
+2.1 Initialize the database
 ```powershell
 # Use the provided script to create the users table:
 python init_db.py
@@ -126,18 +126,18 @@ password TEXT NOT NULL
 conn.commit(); conn.close()
 ```
 
-5. Run the app:
+3. Run the app:
 ```powershell
 python app.py
 ```
 
-6. Open the app in your browser:
+4. Open the app in your browser:
 ```powershell
 http://127.0.0.1:5000
 # Login domain rule: signup enforces emails ending with @high5.com. Passwords must be > 5 chars and include at least one number and one symbol.
 ```
 
-7. (Optional) NLTK Data
+5. (Optional) NLTK Data
 ```powershell
 import nltk
 nltk.download('punkt'); nltk.download('wordnet'); nltk.download('omw-1.4')
