@@ -1,5 +1,5 @@
-# High5 Recruitment Portal
-- **Project**: Hiring Dashboard (Recruitment Portal) with User-friendly Interface
+# High5 Onboarding Chatbot
+- **Project**: Conversational Onboarding Platform for High5 New Hires
 
 ## Team Members
 - Vaenesa Gayatri (Leader)       - develop chatbot
