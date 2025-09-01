@@ -93,7 +93,7 @@ general_pairs = [
     (r"(.*)password(.*)", ["You can reset your password at portal.company.com."]),
     (r"(.*)wifi(.*)", ["The office Wi-Fi is 'CompanyNet', password: Welcome123"]),
     (r"(.*)financial claim(.*)", [f"{processes["financial claim"]}"]),
-    (r"book(.*)meeting room(.*)", [f"{processes["meeting room booking"]}"]),
+    (r"(.*)book(.*)meeting room(.*)", [f"{processes["meeting room booking"]}"]),
     (r"(.*)onboarding(.*)", ["You need to complete the Get Started course and check in with your manager to complete your onboarding"]),
     (r"(.*)training(.*)", ["Head to the Courses tab for your required training course"]),
     (r"(.*)it equipment(.*)", [f"{processes['it equipment request']}"]),
